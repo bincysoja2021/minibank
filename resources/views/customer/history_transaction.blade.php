@@ -19,14 +19,14 @@
               <div class="card-header d-flex justify-content-between">
                 <div>
                   <h5>Listing Transactions of <b>{{$cust_list->name}}</b></h5>
-                  <p>Balance : $ {{$cust_list->transactions->sum('total_amount')}}</p>
+                  <p>Balance : $ {{$balance_amount->total_amount}}</p>
                 </div>
                 <div>
                   <a href="{{ url ('/list-customer')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Customers</a>
                 </div>
               </div>
               <div class="card-body">
-                <table id="datatablesSimple">
+                <table id="datatablestransaction">
                   <thead>
                       <tr>
                           <th>Type</th>
@@ -60,7 +60,7 @@
       <!-- Custom scripts for all pages-->
       <script src="js/sb-admin.min.js"></script>
       <script>
-        const datatablesSimple = document.getElementById('datatablesSimple');
+        const datatablesSimple = document.getElementById('datatablestransaction');
         if (datatablesSimple) {
             new simpleDatatables.DataTable(datatablesSimple);
         }

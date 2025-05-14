@@ -21,19 +21,19 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($request->only('email', 'password'))) 
+        {
             return response()->json(['message' => 'Invalid credentials','statusCode' => "401"], 401);
         }
 
         $user = Auth::user();
-        if ($user->user_type !== 'Customer') {
+        if ($user->user_type !== 'Customer') 
+        {
             return response()->json(['message' => 'Access denied','statusCode' => "403"], 403);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
-    
-         return response()->json(['message'=>"Result fetched  successfully", 'statusCode' => $this-> successStatus,'access_token'=>$token,'success' => 'success',            'token_type' => 'Bearer'], $this-> successStatus);
+        return response()->json(['message'=>"Result fetched  successfully", 'statusCode' => $this-> successStatus,'access_token'=>$token,'success' => 'success',            'token_type' => 'Bearer'], $this-> successStatus);
     }
 
     public function logout(Request $request)

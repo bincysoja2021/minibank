@@ -9,7 +9,8 @@ use App\Http\Controllers\API\TransactionController;
 
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () 
+{
     Route::post('/transaction', [TransactionController::class, 'add_transaction']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

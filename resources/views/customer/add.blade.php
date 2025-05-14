@@ -71,7 +71,7 @@
                           aria-describedby="emailHelp"
 
                           placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-    title="Please enter a valid email address (e.g. user@example.com)"
+                          title="Please enter a valid email address (e.g. user@example.com)"
                         />
                         @error('email')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -109,8 +109,8 @@
                           type="password"
                         />
                          <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
-    <i id="eyeIcon" class="fas fa-eye"></i>
-  </button></div>
+                          <i id="eyeIcon" class="fas fa-eye"></i>
+                          </button></div>
                         @error('password')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -153,12 +153,7 @@
 
       <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
       <!-- Custom scripts for all pages-->
-      <script>
-        const datatablesSimple = document.getElementById('datatablesSimple');
-        if (datatablesSimple) {
-            new simpleDatatables.DataTable(datatablesSimple);
-        }
-      </script>
+      
       @extends('layouts.footer')
     </div>
   </body>

@@ -22,7 +22,7 @@
                 @endif
               </div>
               <div class="card-body">
-                <table id="datatablesSimple">
+                <table id="datatablescustomerlist">
                   <thead>
                       <tr>
                           <th>Customer Id</th>
@@ -60,7 +60,7 @@
       <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
       <!-- Custom scripts for all pages-->
       <script>
-        const datatablesSimple = document.getElementById('datatablesSimple');
+        const datatablesSimple = document.getElementById('datatablescustomerlist');
         if (datatablesSimple) {
             new simpleDatatables.DataTable(datatablesSimple);
         }

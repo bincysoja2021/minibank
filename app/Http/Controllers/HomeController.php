@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Transaction;
 use Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -27,15 +28,21 @@ class HomeController extends Controller
     public function index()
     {
         $loggid=Auth::user()->id;
-        if(Auth::user()->user_type=="Admin")
+        
+        if (Auth::user()->user_type == "Admin") 
         {
             $usercount = User::count();
-            $Transactioncount=Transaction::sum('total_amount');
-        }
+            $latestTransactions = Transaction::select('cust_id', DB::raw('MAX(id) as latest_id'))
+            ->groupBy('cust_id');
+            $Transactioncount = Transaction::joinSub($latestTransactions, 'latest', function ($join) {
+            $join->on('transation.id', '=', 'latest.latest_id');
+            })->sum('transation.total_amount');
+        } 
         else
         {
             $usercount = User::where('id',$loggid)->count();
-            $Transactioncount=Transaction::where('cust_id',$loggid)->sum('total_amount');
+            $translist=Transaction::where('cust_id',$loggid)->orderBy('id','DESC')->first();
+            $Transactioncount=$translist->total_amount;
         }
         
         return view('home',compact('usercount','Transactioncount'));
