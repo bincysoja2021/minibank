@@ -42,7 +42,7 @@
                           <th>Name</th>
                           <th>Email</th>
                           <th>Mobile</th>
-                          <th>Amount</th>
+                          <!-- <th>Amount</th> -->
                           <th>Created On</th>
                           <th>Action</th>
                       </tr>
@@ -54,7 +54,7 @@
                           <td>{{$val->name}}</td>
                           <td>{{$val->email}}</td>
                           <td>{{$val->contact_num}}</td>
-                          <td>$ {{ number_format($val->transactions->sum('total_amount'), 2) }}</td>
+                          <!-- <td>$ {{ number_format($val->transactions->sum('total_amount'), 2) }}</td> -->
 
                           <td>{{ \Carbon\Carbon::parse($val->created_at)->format('d-M, Y') }}</td>
                           <td><a href="{{ url('/history-transactions/' . $val->id) }}" class="btn btn-sm btn-primary">Transactions ( {{$val->transactions->count()}} )</a></td>
