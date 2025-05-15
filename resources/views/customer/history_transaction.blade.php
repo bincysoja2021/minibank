@@ -19,7 +19,7 @@
               <div class="card-header d-flex justify-content-between">
                 <div>
                   <h5>Listing Transactions of <b>{{$cust_list->name}}</b></h5>
-                  <p>Balance : $ {{$balance_amount->total_amount}}</p>
+<p>Balance : $ {{ $balance_amount->total_amount ?? '0.00' }}</p>
                 </div>
                 <div>
                   <a href="{{ url ('/list-customer')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Customers</a>

@@ -25,11 +25,11 @@ class CustomerController extends Controller
         $loggid=Auth::user()->id;
         if(Auth::user()->user_type=="Admin")
         {
-            $cust_list=User::with('transactions')->get();
+            $cust_list=User::with('transactions')->orderBy('id','desc')->get();
         }
         else
         {
-            $cust_list=User::where('id',$loggid)->with('transactions')->get();
+            $cust_list=User::where('id',$loggid)->with('transactions')->orderBy('id','desc')->get();
         }
         return view('customer.index',compact('cust_list'));
     
