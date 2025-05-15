@@ -64,7 +64,7 @@ class CustomerController extends Controller
     {
        $cust_list=User::with('transactions')->where('id',$req->id)->first();
        $transaction_list=Transaction::where('cust_id',$cust_list->id)->get();
-       $balance_amount=Transaction::where('cust_id',$cust_list->id)->latest()->first();
+       $balance_amount=Transaction::where('cust_id',$cust_list->id)->orderBy('id','DESC')->latest()->first();
        return view('customer.history_transaction',compact('cust_list','transaction_list','balance_amount'));
 
     }

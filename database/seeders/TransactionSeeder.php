@@ -22,7 +22,7 @@ class TransactionSeeder extends Seeder
             'date'  => "2025-05-14",
             'status'     => "Credit",
             'credit_amount'=>'500.00',
-            'debit_amount'=>''
+            'debit_amount'=>'0.00'
         ]);
 
         DB::table('transation')->insert([
@@ -31,7 +31,7 @@ class TransactionSeeder extends Seeder
             'ip_address'        => '127.0.0.1',
             'date'  => "2025-05-14",
             'status'     => "Debit",
-            'credit_amount'=>'',
+            'credit_amount'=>'0.00',
             'debit_amount'=>'5.00'
         ]);
 
