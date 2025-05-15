@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Validator;
 
 class TransactionController extends Controller
 {
@@ -12,10 +13,27 @@ class TransactionController extends Controller
 
     public function add_transaction(Request $request)
     {
-        $request->validate([
+        // $request->validate([
+        //     'type' => 'required|in:Credit,Debit',
+        //     'amount' => 'required|numeric|min:0.01',
+        // ]);
+        $validator = Validator::make($request->all(), [
             'type' => 'required|in:Credit,Debit',
             'amount' => 'required|numeric|min:0.01',
         ]);
+        if ($validator->fails()) {
+            $errors  = json_decode($validator->errors());
+            $type   =isset($errors->type[0])? $errors->type[0] : '';
+            $amount=isset($errors->amount[0])? $errors->amount[0] : '';
+
+            if($type){
+              $msg = $type;
+            }else if($amount){
+              $msg = $amount;
+            }
+            
+            return response()->json(['message' =>$validator->errors(),'data'=>[],'statusCode'=>422,'success'=>'error'],422);
+        }
 
         $user = $request->user();
         $transaction=Transaction::where('cust_id',$user->id)->latest()->first();
