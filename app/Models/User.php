@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class, 'cust_id', 'id');
     }
 
+    public function latestTransaction()
+    {
+        return $this->hasOne(Transaction::class, 'cust_id')->latestOfMany();
+    }
+
     
 
 }

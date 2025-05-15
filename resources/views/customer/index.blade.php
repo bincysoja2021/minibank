@@ -42,7 +42,7 @@
                           <th>Name</th>
                           <th>Email</th>
                           <th>Mobile</th>
-                          <!-- <th>Amount</th> -->
+                          <th>Amount</th> 
                           <th>User Type</th>
                           <th>Created On</th>
                           <th>Action</th>
@@ -55,13 +55,17 @@
                           <td>{{$val->name}}</td>
                           <td>{{$val->email}}</td>
                           <td>{{$val->contact_num}}</td>
-                          <!-- <td>$ {{ number_format($val->transactions->sum('total_amount'), 2) }}</td> -->
+                          <td>
+                              @if($val->latestTransaction)
+                              $ {{ number_format($val->latestTransaction->total_amount, 2) }}
+                              @else
+                              $ 0.00
+                              @endif
+                          </td>
                           <td>@if($val->user_type === 'Admin')
                           <span style="color: red;">{{ $val->user_type }}</span>
                           @elseif($val->user_type === 'Customer')
                           <span style="color: blue;">{{ $val->user_type }}</span>
-                          @else
-                          <span>{{ $val->user_type }}</span> {{-- fallback --}}
                           @endif</td>
 
 
