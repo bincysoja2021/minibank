@@ -13,10 +13,7 @@ class TransactionController extends Controller
 
     public function add_transaction(Request $request)
     {
-        // $request->validate([
-        //     'type' => 'required|in:Credit,Debit',
-        //     'amount' => 'required|numeric|min:0.01',
-        // ]);
+        
         $validator = Validator::make($request->all(), [
             'type' => 'required|in:Credit,Debit',
             'amount' => 'required|numeric|min:0.01',
@@ -37,6 +34,7 @@ class TransactionController extends Controller
 
         $user = $request->user();
         $transaction=Transaction::where('cust_id',$user->id)->latest()->first();
+        $current_balance = $transaction ? $transaction->total_amount : 0;
 
         if ($request->type === 'Debit') 
         {
@@ -57,11 +55,11 @@ class TransactionController extends Controller
         }
         if($request->type === 'Credit')
         {
-            $trans_totalamount=$transaction->total_amount + $request->amount;
+            $trans_totalamount=$current_balance + $request->amount;
         }
         else
         {
-            $trans_totalamount=$transaction->total_amount - $request->amount;
+            $trans_totalamount=$current_balance - $request->amount;
         }
         
         $transaction = Transaction::create([
